@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body_block %}
+<div class="container mt-5">
+<div class="row">
+     <div class="col-md-7">
+       <h3 text-align="center">Your Shipping Address:</h3>
+       <br>
+      <div class="card" style="height:auto">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            
+              <li class="list-group-item"><b>Address: </b>{{ saved_address.address}}</li>
+              <li class="list-group-item"><b>Zip code:</b> {{ saved_address.zipcode}}</li>
+              <li class="list-group-item"><b>City:</b> {{ saved_address.city}}</li>
+              <li class="list-group-item"><b>Country:</b> {{ saved_address.country}}</li>
+           
+          </ul>
+        </div>
+      
+      </div>
+    </div>
+
+   <div class="col-md-3">
+       <h3 text-align="center">Your products</h3>
+       <br>
+      <div class="card" style="height:auto">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for order_item in order_items %}
+              <li class="list-group-item">{{ order_item.item.name}} x {{order_item.quantity}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="card-footer">
+          <span class="float-left"><b>Order Total</b></span>
+          <span class="float-right"><b>&#2547; {{order_total|floatformat:2}}</b></span>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+<br>
+<br>
+<form method="POST" action="{% url 'Payment_Application:complete' %}">
+
+{% csrf_token %}
+<div class="form-group row">
+  <div class="col-xs-3">
+        <label for="ex2">Credit Card No:</label>
+        <input class="form-control" id="ex2" type="text">
+      </div>
+      </div>
+      <br>
+<input type="submit" class="btn btn-dark btn-md" value="Make payment"> 
+
+</form>
+</div>
+
+{% endblock %}s

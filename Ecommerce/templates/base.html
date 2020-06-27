@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <title>{% block title_block %} WOZTI{% endblock %}</title>
+  <style>
+
+    .table table-hover {
+      background-color: azure;
+    }
+    
+
+  .card {
+    height: 350px;
+    
+  }
+  .cared-product{
+    border: 
+  }
+
+  .card-product:after {
+    content: "";
+    display: table
+
+    clear: both;
+    visibility: hidden;
+  }
+  .card-product .price-new, .card-product .price {
+    margin-right: 5px;
+  }
+
+  .card-product .price-old {
+    color: #999;
+  }
+
+  .card-product .img-wrap {
+    border-radius: 3px 3px 0 0;
+
+    overflow: hidden;
+    position: relative;
+    height: 250px;
+    text-align: center;
+  }
+
+  .card-product .img-wrap img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  .card-product .info-wrap {
+    overflow: hidden;
+    background: azure;
+    padding: 15px;
+    border-top: 1px solid #eee;
+  }
+
+  .card-product .action-wrap {
+    padding-top: 4px;
+    margin-top: 4px;
+  }
+
+  .card-product .bottom-wrap {
+    padding: 5px;
+    border-top: 1px solid #eee;
+
+  }
+
+  .card-product .title {
+    margin-top: 0px;
+    
+  }
+  .card-product .title a{
+    color: maroon;
+  }
+  .images a{
+    font-size: 40px;
+    font-weight: bolder;
+     font-style: italic;
+    font-color: white;
+    text-align: center;
+
+  }
+
+  .navbar-nav a{
+     
+   font-size: 20px;
+    font-weight:600;
+     
+   
+    text-align: center;
+
+  }
+  .login .nav-item a{
+     margin-right: 30px;
+     font-size: 20px;
+     color: black;
+      font-weight:600;
+     
+    
+    text-align: center;
+
+
+  }
+  .not-login{
+     margin-right: 30px;
+  }
+
+    .not-login1{
+     margin-right: 10px;
+  }
+    .about {
+      margin-left: 20px;
+    }
+        .about .navbar-nav a{
+      margin-left: 10px;
+    }
+    .categories .dropdown-menu .dropdown-item{
+      margin-left: 5px;
+      margin-right: 5px;
+      text-align: center;
+    }
+   
+  </style>
+  
+  
+  
+</head>
+
+<body>
+
+   <nav class="navbar navbar-expand-md navbar-light badge-light">
+        <div class="images">
+        <a href="{% url 'Shop_Application:home' %}" class="navbar-brand">
+            WOZTI
+        </a>
+        </div>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="about">            
+              <div class="navbar-nav">
+                <a href="{% url 'Shop_Application:home' %}" class="nav-item nav-link active"><i class="fa fa-home" aria-hidden="true"></i>
+ Home</a>
+
+                <a href="#" class="nav-item nav-link"><i class="fa fa-phone-square" aria-hidden="true"></i>
+Contact</a>
+           <div class="categories">
+              <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+          <div class="dropdown-menu" aria-labelledby="nabbarDropdown">
+            <a class="dropdown-item" href="{% url 'Shop_Application:accessories' %}">Accessories</a>
+            <a class="dropdown-item" href="{% url 'Shop_Application:clothing' %}">Clothing</a>
+            
+            <a class="dropdown-item" href="{% url 'Shop_Application:eyewear' %}">Eye Wear</a>
+            <a class="dropdown-item" href="{% url 'Shop_Application:electronics' %}">Electronics</a>
+            <a class="dropdown-item" href="{% url 'Shop_Application:timepieces' %}">Time Pieces</a>
+            
+          </div>
+        </li>
+      </div>
+                
+            </div>
+          </div>
+
+              <ul class="navbar-nav ml-auto">
+              {% if request.user.is_authenticated %}
+               <div class="not-login1"> 
+              <li class="nav-item">
+          <a href="{% url 'Order_Application:cart' %}" class="nav-link">
+              <i class="fa fa-shopping-cart"></i> Cart
+              <span class="badge badge-light"></span>
+          </a>
+
+        </li>
+      </div>
+        <div class="not-login">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-tie"></i> {{request.user.profile.username}}</a>
+          <div class="dropdown-menu" aria-labelledby="nabbarDropdown">
+            <a class="dropdown-item" href="{% url 'Login_Application:profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'Payment_Application:orders' %}">Orders</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'Login_Application:logout' %}">Logout</a>
+          </div>
+        </li>
+      </div>
+          {% else %}
+        <div class="login">
+        <li class="nav-item">
+          <a href="{% url 'Login_Application:login' %}">Login</a>
+        </li>
+        {% endif %}
+      </div>
+    </ul>
+  </div>
+    </nav>
+
+
+ 
+
+
+
+
+
+
+  <div class="container">
+    
+     <div class="messages container mt-2">
+      {% if messages %}
+        {% for message in messages %}
+          <div {% if message.tags %} class="alert alert-{{message.tags}}{% endif %}" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    {% block body_block %} {% endblock %}
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
